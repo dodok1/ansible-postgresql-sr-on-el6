@@ -10,7 +10,7 @@
     lc_ctype: "{{ item.ctype }}"
     owner: "{{ item.owner }}"
   with_items: "{{ postgresql_databases }}"
-  when: postgresql_databases and postgresql_databases|length > 0
+  when: postgresql_databases is defined and postgresql_databases|length > 0
   become: true
   become_user: 'postgres'
 
@@ -19,6 +19,6 @@
   with_nested:
     - "{{ postgresql_databases }}"
     - "{{ postgresql_extensions }}"
-  when: postgresql_databases and postgresql_databases|length > 0 and postgresql_extensions and postgresql_extensions|length > 0 and postgresql_version != '8.4'
+  when: postgresql_databases is defined and postgresql_databases|length > 0 and postgresql_extensions is defined and postgresql_extensions|length > 0 and postgresql_version != '8.4'
   become: true
   become_user: 'postgres'

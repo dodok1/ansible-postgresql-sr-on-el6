@@ -1,0 +1,7 @@
+postgresql_repos:
+  - { version: "9.5", repo: "http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-sl94-9.5-3.noarch.rpm" }
+  - { version: "9.4", repo: "http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-sl94-9.4-1.noarch.rpm" }
+  - { version: "9.3", repo: "http://yum.postgresql.org/9.3/redhat/rhel-7-x86_64/pgdg-sl93-9.3-1.noarch.rpm" }
+  - { version: "9.2", repo: "http://yum.postgresql.org/9.2/redhat/rhel-7-x86_64/pgdg-sl92-9.2-8.noarch.rpm" }
+  - { version: "9.1", repo: "http://yum.postgresql.org/9.1/redhat/rhel-7-x86_64/pgdg-sl91-9.1-6.noarch.rpm" }
+  - { version: "9.0", repo: "http://yum.postgresql.org/9.0/redhat/rhel-7-x86_64/pgdg-sl90-9.0-6.noarch.rpm" }

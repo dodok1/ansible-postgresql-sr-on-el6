@@ -27,14 +27,14 @@
   when: postgresql_cluster_symlink_src|length > 0
 
 - name: "Stage 2: check cluster directory"
-  stat: path={{ postgresql_data_dir }}
-  register: postgresql_data_stat
+  find: path={{ postgresql_data_dir }} hidden=true
+  register: postgresql_data_content
 
 - name: "Stage 2: initialize new postgresql cluster"
   become: true
   become_user: "{{ postgresql_admin_user }}"
-  command: "{{ postgresql_exec_dir }}/initdb -D {{ postgresql_data_dir }}"
-  when: postgresql_data_stat.stat.exists == False
+  command: "{{ postgresql_exec_dir }}/initdb -D {{ postgresql_data_dir }} -E {{ postgresql_encoding }} --locale {{ postgresql_locale }}"
+  when: postgresql_data_content.matched == 0
 
 - name: "Stage 2: configure pg_hba.conf"
   template:

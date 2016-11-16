@@ -1,17 +1,17 @@
 ---
+  - include_vars: "os_{{ ansible_os_family }}.yml"
+
 #- name: Installing postgresql
-  - group_by: key=os_{{ ansible_os_family }}
   - include: 'install.yml'
 
-#- debug: msg={{ postgresql_data_dir }}
 #- name: Configuring the master
   - include: 'configure-master.yml'
-    when: postgresql_master == 'true'
+    when: postgresql_master == true
   - include: 'users.yml'
-    when: postgresql_master == 'true'
+    when: postgresql_master == true
   - include: 'databases.yml'
-    when: postgresql_master == 'true'
+    when: postgresql_master == true
 
 #- name: Configuring slaves
   - include: 'configure-slaves.yml'
-    when: postgresql_master == 'false'
+    when: postgresql_master == false
