@@ -22,6 +22,7 @@
     src: "{{ postgresql_cluster_symlink_src }}"
     dest: "{{ postgresql_data_dir }}"
     state: link
+    force: true
     owner: "{{ postgresql_admin_user }}"
     group: "{{ postgresql_admin_user }}"
   when: postgresql_cluster_symlink_src|length > 0
