@@ -33,6 +33,7 @@ postgresql_streaming_master: 192.168.0.10
 postgresql_streaming_slaves: [ 192.168.0.11, 192.168.0.12 ]
 ```
 - set other relevant variables. (examples in `defaults/main`)
+- if needed, set `proxy_env: { http_proxy: 'http://somewhere' }` 
 - **important**: `sudo` must be installed on remote machines.
 - Run your playbook.
 ```

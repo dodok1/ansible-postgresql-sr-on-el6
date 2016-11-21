@@ -16,16 +16,17 @@
     state: present
     pkg: "{{ item.repo }}"
   when: item.version == "{{ postgresql_version }}"
-  with_items: postgresql_repos
+  with_items: '{{postgresql_repos}}'
+  environment: '{{ proxy_env|default({}) }}'
 
 - name: "Stage 1: install postgresql packages"
   yum: 
     state: latest
-    pkg: "{{ item }}"
-  with_items:
-    - postgresql{{ postgresql_version |replace('.', '') }}-server
+    pkg: 'postgresql{{ postgresql_version |replace(".", "") }}-server'
+  environment: '{{ proxy_env|default({}) }}'
 
 - name: "Stage 1: install postgresql contrib package"
   yum: 
     state: latest
-    pkg: postgresql{{ postgresql_version |replace('.', '') }}-contrib
+    pkg: 'postgresql{{ postgresql_version |replace(".", "") }}-contrib'
+  environment: '{{ proxy_env|default({}) }}'
