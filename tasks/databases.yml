@@ -15,7 +15,9 @@
   become_user: 'postgres'
 
 - name: "Stage: 4: add extensions"
-  command: "psql {{ item[0].name }} -c 'CREATE EXTENSION IF NOT EXISTS {{ item[1] }}'"
+  postgresql_ext:
+    db: '{{ item[0].name }}'
+    ext: '{{ item[1] }}'
   with_nested:
     - "{{ postgresql_databases }}"
     - "{{ postgresql_extensions }}"
