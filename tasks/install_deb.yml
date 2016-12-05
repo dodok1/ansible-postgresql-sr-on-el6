@@ -8,3 +8,4 @@
     pkg: "{{ item }}"
   with_items:
     - postgresql-{{ postgresql_version }}
+  environment: '{{ proxy_env|default({}) }}'

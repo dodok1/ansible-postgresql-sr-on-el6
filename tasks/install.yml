@@ -10,4 +10,5 @@
 
 - name: 'Stage 1: install Ansible postgresql dependency package'
   package: state='latest' pkg='python-psycopg2'
+  environment: '{{ proxy_env|default({}) }}'
 
