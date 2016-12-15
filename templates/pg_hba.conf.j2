@@ -82,7 +82,9 @@
 {% endfor %}
 
 {% for slave in postgresql_streaming_slaves %}
+{%if slave %}
 host	replication		{{ postgresql_streaming_user.name }}		{{ slave }}/32		{{ postgresql_default_ipv4_auth_method }}
+{% endif %}
 {% endfor %}
 
 # Custom
