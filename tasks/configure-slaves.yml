@@ -2,11 +2,16 @@
 
 - name: "Stage 3: stop old postgresql service"
   service: name="{{ postgresql_service_name }}" state=stopped
-  when: postgresql_drop_old_cluster
 
 - name: "Stage 3: remove old postgresql cluster"
   file: path="{{ postgresql_data_dir }}" state=absent
-  when: postgresql_drop_old_cluster
+
+- name: "Stage 3: remove old postgresql cluster with symlink"
+  file:
+    path: "{{ postgresql_cluster_symlink_src }}"
+    state: absent
+  when: postgresql_cluster_symlink_src|length > 0
+  register: remove
 
 - name: "Stage 3: cluster directory replacement with symlink, check destination directory"
   file:
@@ -38,7 +43,7 @@
     mode: 0600
 
 - name: "Stage 3: check cluster directory"
-  stat: path={{ postgresql_data_dir }}
+  stat: path={{ postgresql_data_dir }}/base
   register: postgresql_data_stat
 
 - name: "Stage 3: initialize new postgresql cluster"
